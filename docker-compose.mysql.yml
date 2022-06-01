@@ -1,0 +1,37 @@
+version: '3.3'
+services:
+  global-mysql-5.7:
+    image: mysql:5.7
+    restart: always
+    networks:
+      - local-network
+    environment:
+      MYSQL_DATABASE: 'db'
+      MYSQL_USER: 'omair'
+      MYSQL_PASSWORD: 'omair9090'
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - datastore:/var/lib/mysql
+
+  phpmyadmin:
+    depends_on:
+      - global-mysql-5.7
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - '3307:80'
+    environment:
+      PMA_HOST: global-mysql-5.7
+      MYSQL_ROOT_PASSWORD: root 
+    networks:
+      - local-network
+
+volumes:
+  datastore:
+
+networks:
+  local-network:
