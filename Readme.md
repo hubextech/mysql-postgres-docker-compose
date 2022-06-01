@@ -30,7 +30,6 @@ PORT: 3306
 
 ### Postgres Connection
 ```
-POSTGRES Connection:
 Host: localhost
 PORT: 5432
 ```
